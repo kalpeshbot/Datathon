@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# Caches
+.pytest_cache/
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Scratch & temporary artifacts
+last_prompt.txt
+step_341.json
+*.tmp
+*.log
+
+# Empty / runtime temp folders
+data/processed/
+scratch/
+
+# OS metadata
+.DS_Store
+Thumbs.db

@@ -1,0 +1,31 @@
+{
+  "engine": "LAPE (Leak Analysis & Prediction Engine)",
+  "random_seed": 42,
+  "total_scenarios": 600,
+  "families": [
+    "control_valid",
+    "pricing_extreme_discount",
+    "pricing_glitch_negative_margin",
+    "campaign_funnel_inversion",
+    "campaign_budget_burn",
+    "inventory_phantom_stockout",
+    "inventory_unflagged_depletion",
+    "return_abuse_cluster",
+    "compound_multi_signal",
+    "benign_edge_case_bulk"
+  ],
+  "family_counts": {
+    "control_valid": 60,
+    "pricing_extreme_discount": 60,
+    "pricing_glitch_negative_margin": 60,
+    "campaign_funnel_inversion": 60,
+    "campaign_budget_burn": 60,
+    "inventory_phantom_stockout": 60,
+    "inventory_unflagged_depletion": 60,
+    "return_abuse_cluster": 60,
+    "compound_multi_signal": 60,
+    "benign_edge_case_bulk": 60
+  },
+  "leak_count": 480,
+  "control_count": 120
+}

@@ -1,0 +1,157 @@
+{
+  "engine": "LAPE (Leak Analysis & Prediction Engine)",
+  "data_dir": "data\\raw",
+  "files_checked": {
+    "customers.csv": {
+      "exists": true,
+      "expected_rows": 3000,
+      "actual_rows": 3000,
+      "match": true,
+      "columns": [
+        "customer_id",
+        "region",
+        "customer_segment",
+        "signup_date",
+        "preferred_channel"
+      ]
+    },
+    "products.csv": {
+      "exists": true,
+      "expected_rows": 250,
+      "actual_rows": 250,
+      "match": true,
+      "columns": [
+        "product_id",
+        "category",
+        "unit_cost",
+        "list_price",
+        "supplier_lead_days"
+      ]
+    },
+    "transactions.csv": {
+      "exists": true,
+      "expected_rows": 18000,
+      "actual_rows": 18000,
+      "match": true,
+      "columns": [
+        "transaction_id",
+        "customer_id",
+        "product_id",
+        "timestamp",
+        "quantity",
+        "unit_price",
+        "discount_pct",
+        "status",
+        "channel",
+        "payment_method"
+      ]
+    },
+    "inventory.csv": {
+      "exists": true,
+      "expected_rows": 5000,
+      "actual_rows": 5000,
+      "match": true,
+      "columns": [
+        "inventory_record_id",
+        "product_id",
+        "date",
+        "stock_on_hand",
+        "reorder_threshold",
+        "stockout_flag",
+        "supplier_delay_days"
+      ]
+    },
+    "campaigns.csv": {
+      "exists": true,
+      "expected_rows": 1200,
+      "actual_rows": 1200,
+      "match": true,
+      "columns": [
+        "campaign_id",
+        "date",
+        "channel",
+        "category",
+        "spend",
+        "impressions",
+        "clicks",
+        "conversions"
+      ]
+    }
+  },
+  "row_counts": {
+    "customers.csv": 3000,
+    "products.csv": 250,
+    "transactions.csv": 18000,
+    "inventory.csv": 5000,
+    "campaigns.csv": 1200
+  },
+  "missing_values": {
+    "customers.csv": 0,
+    "products.csv": 0,
+    "transactions.csv": 0,
+    "inventory.csv": 0,
+    "campaigns.csv": 0
+  },
+  "duplicate_rows": {
+    "customers.csv": 0,
+    "products.csv": 0,
+    "transactions.csv": 0,
+    "inventory.csv": 0,
+    "campaigns.csv": 0
+  },
+  "foreign_key_integrity": {
+    "transactions_to_customers": {
+      "orphan_count": 0,
+      "valid": true
+    },
+    "transactions_to_products": {
+      "orphan_count": 0,
+      "valid": true
+    },
+    "inventory_to_products": {
+      "orphan_count": 0,
+      "valid": true
+    }
+  },
+  "transaction_status_counts": {
+    "Completed": 13962,
+    "Cancelled": 1689,
+    "Returned": 1431,
+    "Pending": 918
+  },
+  "negative_margins": {
+    "products_cost_gt_list": {
+      "count": 76,
+      "total_products": 250,
+      "percentage": 30.4,
+      "expected_count": 76
+    },
+    "transactions_effective_lt_cost": {
+      "count": 6829,
+      "total_transactions": 18000,
+      "expected_count": 6829,
+      "completed_negative_margin_count": 5315,
+      "max_shortfall": 204.1875,
+      "potential_shortfall_total_all_statuses": 215600.6245,
+      "potential_shortfall_completed_only": 1214115.5014999998
+    }
+  },
+  "campaign_funnel_violations": {
+    "clicks_gt_impressions": 84,
+    "conversions_gt_clicks": 88,
+    "total_violating_records": 171,
+    "expected_count": 171
+  },
+  "inventory_flag_discrepancies": {
+    "total_records": 5000,
+    "mismatched_records": 1253,
+    "expected_count": 1240,
+    "flag_1_but_stock_above_threshold": 648,
+    "flag_0_but_stock_le_threshold": 605
+  },
+  "summary": {
+    "total_rows_inspected": 27450,
+    "expected_total_rows": 27450,
+    "total_rows_match": true
+  }
+}

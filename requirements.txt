@@ -1,0 +1,9 @@
+# LAPE (Leak Analysis & Prediction Engine)
+# DATATHON 2026 Track 4: The Money Leak
+
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+streamlit>=1.30.0
+reportlab>=4.0.0
+pytest>=8.0.0

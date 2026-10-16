@@ -1,0 +1,185 @@
+{
+  "baseline_a": {
+    "precision": 1.0,
+    "recall": 0.7166666666666667,
+    "f1": 0.8349514563106796,
+    "pr_auc": 0.9444444444444445,
+    "precision_at_10": 1.0,
+    "fpr_on_controls": 0.0,
+    "true_positives": 43,
+    "false_positives": 0,
+    "true_negatives": 30,
+    "false_negatives": 17,
+    "confusion_matrix": [
+      [
+        30,
+        0
+      ],
+      [
+        17,
+        43
+      ]
+    ]
+  },
+  "baseline_b": {
+    "precision": 1.0,
+    "recall": 0.55,
+    "f1": 0.7096774193548387,
+    "pr_auc": 0.8970675594330121,
+    "precision_at_10": 1.0,
+    "fpr_on_controls": 0.0,
+    "true_positives": 33,
+    "false_positives": 0,
+    "true_negatives": 30,
+    "false_negatives": 27,
+    "confusion_matrix": [
+      [
+        30,
+        0
+      ],
+      [
+        27,
+        33
+      ]
+    ]
+  },
+  "ml_model": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "pr_auc": 1.0,
+    "precision_at_10": 1.0,
+    "fpr_on_controls": 0.0,
+    "true_positives": 60,
+    "false_positives": 0,
+    "true_negatives": 30,
+    "false_negatives": 0,
+    "confusion_matrix": [
+      [
+        30,
+        0
+      ],
+      [
+        0,
+        60
+      ]
+    ]
+  },
+  "comparison_table": [
+    {
+      "Method": "Baseline A (Raw Shortfall)",
+      "Precision": 1.0,
+      "Recall": 0.717,
+      "F1-Score": 0.835,
+      "PR-AUC": 0.944,
+      "Precision@10": 1.0,
+      "FPR on Controls": 0.0
+    },
+    {
+      "Method": "Baseline B (Derived Rules)",
+      "Precision": 1.0,
+      "Recall": 0.55,
+      "F1-Score": 0.71,
+      "PR-AUC": 0.897,
+      "Precision@10": 1.0,
+      "FPR on Controls": 0.0
+    },
+    {
+      "Method": "LAPE ML Model (HistGB)",
+      "Precision": 1.0,
+      "Recall": 1.0,
+      "F1-Score": 1.0,
+      "PR-AUC": 1.0,
+      "Precision@10": 1.0,
+      "FPR on Controls": 0.0
+    }
+  ],
+  "model_family_breakdown": {
+    "benign_edge_case_bulk": {
+      "type": "control",
+      "sample_count": 14,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "clean_pass_rate": 1.0
+    },
+    "compound_multi_signal": {
+      "type": "leak_scenario",
+      "sample_count": 25,
+      "true_positives": 25,
+      "recall": 1.0,
+      "detection_pct": 100.0
+    },
+    "control_valid": {
+      "type": "control",
+      "sample_count": 16,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "clean_pass_rate": 1.0
+    },
+    "pricing_extreme_discount": {
+      "type": "leak_scenario",
+      "sample_count": 11,
+      "true_positives": 11,
+      "recall": 1.0,
+      "detection_pct": 100.0
+    },
+    "pricing_glitch_negative_margin": {
+      "type": "leak_scenario",
+      "sample_count": 12,
+      "true_positives": 12,
+      "recall": 1.0,
+      "detection_pct": 100.0
+    },
+    "return_abuse_cluster": {
+      "type": "leak_scenario",
+      "sample_count": 12,
+      "true_positives": 12,
+      "recall": 1.0,
+      "detection_pct": 100.0
+    }
+  },
+  "rule_b_family_breakdown": {
+    "benign_edge_case_bulk": {
+      "type": "control",
+      "sample_count": 14,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "clean_pass_rate": 1.0
+    },
+    "compound_multi_signal": {
+      "type": "leak_scenario",
+      "sample_count": 25,
+      "true_positives": 25,
+      "recall": 1.0,
+      "detection_pct": 100.0
+    },
+    "control_valid": {
+      "type": "control",
+      "sample_count": 16,
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "clean_pass_rate": 1.0
+    },
+    "pricing_extreme_discount": {
+      "type": "leak_scenario",
+      "sample_count": 11,
+      "true_positives": 5,
+      "recall": 0.4545,
+      "detection_pct": 45.5
+    },
+    "pricing_glitch_negative_margin": {
+      "type": "leak_scenario",
+      "sample_count": 12,
+      "true_positives": 3,
+      "recall": 0.25,
+      "detection_pct": 25.0
+    },
+    "return_abuse_cluster": {
+      "type": "leak_scenario",
+      "sample_count": 12,
+      "true_positives": 0,
+      "recall": 0.0,
+      "detection_pct": 0.0
+    }
+  }
+}
