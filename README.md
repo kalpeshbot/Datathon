@@ -1,257 +1,252 @@
-# LAPE (Leak Analysis & Prediction Engine)
-### Evidence-Linked Financial Triage & Financial Leak Physics Platform
-**DATATHON 2026 — Track 4: The Money Leak**
+<div align="center">
 
----
+# LAPE
+### Leak Analysis & Prediction Engine
 
-## 1. Project Identity & Overview
+**From scattered business data to explainable risk signals.**
 
-**LAPE (Leak Analysis & Prediction Engine)** combines business-based mathematical equations, scientifically constrained synthetic data generation, machine learning, and evidence-linked financial analysis to identify and prioritize potential financial and operational leaks.
+An analytics-first decision-support prototype for inspecting business records, surfacing unusual patterns, prioritizing cases, and helping people understand the evidence behind a flag.
 
-> [!IMPORTANT]
-> **Core Product Promise & Governance**:
-> "Turn suspicious business numbers into evidence-linked financial investigations, with transparent calculations, explicit uncertainty, and measurable detection performance."
-> 
-> LAPE never fabricates results, claims unverified real-world accuracy, or presents potential financial exposure as confirmed accounting fraud or realized loss.
+**Datathon 2026 — Track 4: The Money Leak**
 
-### Three Distinct Output Dimensions
-Throughout the backend and UI, LAPE strictly segregates three critical dimensions:
-1. **Potential Financial Exposure**: A transparent, reproducible dollar calculation derived directly from verified source fields.
-2. **Evidence Reliability**: Classified into `HIGH`, `MEDIUM`, or `LOW` based on schema constraints, relational joins, and dataset characteristics.
-3. **Action Urgency**: Prioritized into `CRITICAL`, `HIGH`, `MEDIUM`, or `LOW` by a documented operational policy rather than an opaque model confidence score.
+</div>
 
----
+------------------------------------------------------------------------
 
-## 2. Quickstart & One-Click Launch
+## The pitch
 
-### Option A: One-Click Startup (Recommended for Windows)
-Double-click [`run_lape.bat`](file:///c:/Users/kalpesh/OneDrive/Desktop/Datathon/run_lape.bat) or run from terminal:
-```cmd
-run_lape.bat
-```
-This launcher automatically verifies Python 3.12, confirms installed packages (`pandas`, `numpy`, `scikit-learn`, `streamlit`), and boots the dashboard at `http://localhost:8501`.
+Businesses rarely keep every useful clue in one place. A transaction can look ordinary on its own, while a pattern across transactions, inventory, campaigns, customers, and products may deserve a closer look. The challenge is not just finding an unusual record. It is making the signal understandable enough for someone to investigate it.
 
-### Option B: Manual Terminal Execution
-```powershell
-# 1. Install dependencies
-pip install -r requirements.txt
+**LAPE turns business data into an investigation workflow.** It brings data validation, feature engineering, rule-based analysis, model-assisted evaluation, scenario testing, triage, and reporting into one Streamlit dashboard. The goal is to help a reviewer move from *"something looks unusual"* to *"here is what was flagged, why it matters, and what should be checked next."*
 
-# 2. Launch Streamlit Application (Localhost Port 8501)
-python -m streamlit run app.py --server.port 8501
-```
+LAPE is a **screening and decision-support prototype**, not an automated verdict. A risk indicator is a reason to investigate, not proof that a loss, fraud, or causal relationship exists.
 
-### Local Evaluation Sandbox Credentials
+## Why LAPE?
+
+- **One investigation workspace:** Move seamlessly between data quality, alerts, investigations, scenarios, evaluation, and reports.
+- **Evidence over mystery scores:** Use computed features and transparent rules to make findings easy to inspect and audit.
+- **Prioritized review:** Help reviewers decide which records deserve attention first with structured triage.
+- **Repeatable testing:** Use synthetic scenarios to exercise the pipeline under controlled, reproducible conditions.
+- **A path to explainable AI:** A planned Gemini-powered assistant will help users understand dashboard findings in plain language, without replacing the underlying analysis.
+
+## What the prototype brings together
+
+| Workspace | Purpose |
+| :--- | :--- |
+| **Overview** | Entry point to the analysis workflow and key system metrics. |
+| **Data Quality** | Inspect input quality, schema constraints, and referential integrity. |
+| **Alert Queue** | Review potential risk indicators prioritized by exposure, reliability, and urgency. |
+| **Investigation** | Examine a selected case, supporting signals, and mathematical step-by-step formulas. |
+| **Scenario Lab** | Explore generated scenarios, what-if conditions, and real-time physics simulations. |
+| **Model Evaluation** | Review evaluation outputs, baseline comparisons, and operational limitations. |
+| **Reports** | Prepare, preview, and export executive summaries of findings. |
+| **Settings** | Manage user preferences, language selection, themes, and table layouts. |
+
+The interface provides **dark and light themes** (`ui/themes.py`), **eight-language localization** (English, Hindi, Spanish, French, German, Japanese, Chinese, Russian via `ui/translations.py`), and **INR/USD currency formatting** (`src/currency.py`). These are interface capabilities, not claims about model performance.
+
+### Local Reviewer Sandbox Credentials
 For local reviewer and evaluator convenience:
 - **Default Username:** `demo@lape.local` (or `admin`)
 - **Default Password:** `lape2026`
 - **Environment Override:** Set `LAPE_DEMO_USER` and `LAPE_DEMO_PASS` in your environment to override.
-- *Includes a local arithmetic challenge (CAPTCHA) to simulate authenticated access within an offline evaluation sandbox.*
+- *Includes a local arithmetic challenge (CAPTCHA) simulating authenticated access within an offline evaluation sandbox.*
 
-### Option C: Running the Full Reproducible Pipeline from Scratch
-```powershell
-# 1. Audit raw datasets & confirm baseline counts
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" scripts/audit_data.py
+## How LAPE works
 
-# 2. Generate controlled synthetic scenarios (random seed 42)
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" scripts/generate_scenarios.py
+1. **Load business tables.** Keep the source and intended use of each dataset clear.
+2. **Validate the inputs.** Check structure, missing or invalid values, and referential data integrity.
+3. **Engineer features.** Transform raw fields into indicators that can be examined and evaluated.
+4. **Analyze signals.** Apply the verified mathematical rules and tree-based model logic implemented in the repository.
+5. **Prioritize review.** Organize potential findings into an evidence-linked triage queue.
+6. **Test scenarios.** Exercise the pipeline with generated synthetic cases.
+7. **Evaluate and report.** Review available metrics, document limitations, and export summaries.
 
-# 3. Train ML models & benchmark against baselines with grouped split
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" scripts/train_model.py
-
-# 4. Run automated test suite (15 passing tests)
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" -m pytest tests -v
+```mermaid
+flowchart TD
+    A[Business CSV datasets] --> B[Validation and integrity checks]
+    B --> C[Feature engineering]
+    C --> D[Rules and model analysis]
+    D --> E[Risk indicators and triage]
+    E --> F[Human investigation]
+    C --> G[Synthetic scenario testing]
+    G --> H[Evaluation and reports]
+    E -. planned .-> I[Gemini explanation assistant]
+    I -. explanations only .-> F
 ```
 
----
+The Gemini connection shown with a dashed line is a **planned future enhancement**, not a claim that the API is already integrated.
 
-## 3. Data Sources & Verified Baseline Audit
+## Data and evaluation: what the results mean
 
-LAPE inspects five supplied CSV datasets in `DATASET/` (replicated to `data/raw/` while preserving the originals):
+The application inspects five supplied CSV datasets in `DATASET/` (replicated in `data/raw/` with zero modifications to originals):
 
-| Dataset | Row Count | Primary Key | Foreign Key Target | Missing Values | Duplicate Rows |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `customers.csv` | 3,000 | `customer_id` | — | 0 | 0 |
-| `products.csv` | 250 | `product_id` | — | 0 | 0 |
-| `transactions.csv` | 18,000 | `transaction_id` | `customer_id`, `product_id` | 0 | 0 |
-| `inventory.csv` | 5,000 | `inventory_record_id` | `product_id` | 0 | 0 |
-| `campaigns.csv` | 1,200 | `campaign_id` | — | 0 | 0 |
-| **Total Inspected** | **27,450** | — | **0 Orphan Keys** | **0** | **0** |
+| Dataset Filename | Verified Row Count | Role in LAPE Pipeline | Integrity Findings |
+| :--- | :--- | :--- | :--- |
+| `transactions.csv` | 18,000 | Sales records, discounts, margins | 0 orphan keys; 6,829 negative margin sales ($1.21M shortfall) |
+| `inventory.csv` | 5,000 | Stock levels, reorder thresholds | 0 orphan keys; 1,253 threshold vs stockout discrepancies |
+| `campaigns.csv` | 1,200 | Marketing spend, impressions, clicks | 171 physical funnel inversions (clicks > impressions / conversions > clicks) |
+| `customers.csv` | 3,000 | Customer profiles, return histories | 0 missing, 0 duplicates, 0 orphan references |
+| `products.csv` | 250 | Catalog list prices and unit costs | 76 products with list price < unit cost (catalog cost inversion) |
+| **Total Raw Data** | **27,450** | **Complete Multi-Table Business Baseline** | **0 Orphan Foreign Keys across all tables** |
 
-### Verified Audit Findings
-- **Transaction Status Distribution**:
-  - `Completed`: 13,962 (Fulfilled sales; revenue realized)
-  - `Cancelled`: 1,689 (Averted exposure)
-  - `Returned`: 1,431 (Customer refunds; inventory restocking risk)
-  - `Pending`: 918 (In-flight unfulfilled orders)
-- **Mathematical Margin Discrepancy**: 6,829 of 18,000 transactions have effective unit price below unit cost (5,315 Completed sales; total calculated shortfall $1,214,115.50).
-- **Catalog Cost Inversion**: 76 of 250 products (30.4%) have `unit_cost > list_price`. As confirmed in dataset documentation, costs and prices were generated independently in this educational dataset.
-- **Marketing Funnel Inversions**: 171 of 1,200 campaign records violate physical funnel constraints (84 have `clicks > impressions`, 88 have `conversions > clicks`).
-- **Inventory Discrepancy**: 1,253 records disagree with the physical threshold rule (`stock_on_hand <= reorder_threshold` vs `stockout_flag`).
+In addition, `data/synthetic/lape_synthetic_scenarios.csv` contains 600 controlled test scenarios across 10 distinct anomaly families (`random_seed=42`) used for benchmark validation without modifying raw source data.
 
----
+### Responsible interpretation
 
-## 4. Mathematical Equations & Feature Engineering
+- **A flag is not a confirmed loss.** LAPE surfaces indicators for further investigation; exposure figures represent theoretical line-item maximums.
+- **Synthetic evaluation is not real-world validation.** Strong scores on designed scenarios show performance on those scenarios only under controlled conditions.
+- **Correlation is not causation.** A campaign and a transaction appearing in the same time window does not prove the campaign caused the transaction.
+- **Exposure estimates are estimates.** Financial calculations depend on their documented formulas and assumptions.
+- **Human review remains essential.** Verify source records, business context, and vendor contracts before acting.
 
-All financial equations are explicit, verified by unit tests, and avoid double counting:
+### Verified Model Implementation
+- **Primary Implemented Algorithm:** `HistGradientBoostingClassifier` (scikit-learn `sklearn.ensemble.HistGradientBoostingClassifier`) serialized in `models/lape_hist_gb.joblib`.
+- **Benchmark Alternative Algorithm:** `RandomForestClassifier` serialized in `models/lape_random_forest.joblib`.
+- **Target Leakage Prevention:** Scenario metadata (`injected_condition`, `expected_detection`) is strictly excluded from feature matrices.
+- **Evaluation Split:** Grouped strictly by `source_record_id` ensuring zero overlap between training and held-out test splits.
 
-### A. Pricing, Margins, and Shortfalls
-1. **Effective Unit Price**:
-   $$\text{effective\_unit\_price} = \text{unit\_price} \times (1 - \text{discount\_pct})$$
-   *(Verified: `discount_pct` is stored as a decimal fraction, e.g., 0.20 = 20%).*
-2. **Unit Margin**:
-   $$\text{unit\_margin} = \text{effective\_unit\_price} - \text{unit\_cost}$$
-3. **Price-Cost Shortfall (Per Unit)**:
-   $$\text{price\_cost\_shortfall} = \max(0, \text{unit\_cost} - \text{effective\_unit\_price})$$
-4. **Potential Shortfall Amount (Line Item Total)**:
-   $$\text{potential\_shortfall\_amount} = \text{quantity} \times \text{price\_cost\_shortfall}$$
-5. **Status-Segregated Realization**:
-   - `Completed`: Realized shortfall (immediate accounting deficit)
-   - `Pending`: In-flight operational risk (prior to shipment intervention)
-   - `Returned`: Return cost at risk (refund/restocking deficit)
-   - `Cancelled`: Averted exposure ($0 realized loss)
+## Planned feature: LAPE AI — Ask your business data
 
-### B. Statistical Peer-Group Deviations (Median & MAD)
-To avoid outlier contamination from mean and standard deviation, LAPE calculates robust deviations per product category:
-$$\text{MAD} = \text{median}(|x_i - \text{median}(x)|)$$
-$$\text{Robust } z = \frac{x_i - \text{median}(x)}{\max(1.4826 \times \text{MAD}, 10^{-4})}$$
-Safeguards handle zero MAD and small peer groups safely without division by zero.
+The next planned enhancement is an **AI tab powered by the Google Gemini API**. The vision is to let a user ask questions about the dashboard and receive explanations grounded in the analysis, rather than needing to understand every column, chart, or metric first.
 
-### C. Marketing Funnel Physics
-$$\text{Compromised Spend Exposure} = \begin{cases} \text{spend} & \text{if } \text{clicks} > \text{impressions} \lor \text{conversions} > \text{clicks} \\ 0 & \text{otherwise} \end{cases}$$
+Example questions for the planned assistant:
 
----
+- *"Why was this record flagged?"*
+- *"Explain these columns in simple business terms."*
+- *"Summarize the strongest signals behind this alert."*
+- *"What should I verify before treating this as a real issue?"*
+- *"Compare these scenarios and explain what changed."*
+- *"Summarize this report for a business stakeholder."*
 
-## 5. Financial Leak Physics Scenario Generator
+### Design principles for LAPE AI
 
-To test detection capability without fabricating labels on raw data, LAPE includes a reproducible scenario generator (`random_seed=42`):
+1. **Ground answers in evidence.** Pass relevant computed summaries, feature values, and report content directly from LAPE's deterministic rules and models.
+2. **Keep explanation separate from detection.** Gemini will explain the available evidence; it must not silently alter risk scores or invent predictions.
+3. **Show uncertainty.** If the available data cannot answer a question, the assistant should explicitly state its limitations.
+4. **Navigate transparently.** The assistant may eventually link users to relevant dashboard pages or records. It must not claim to control the browser or perform actions that have not been implemented.
+5. **Protect data and credentials.** Store API keys in environment variables or a secrets manager, never in source code. Review provider terms before sending business data to an external service.
+6. **Keep a human in the loop.** AI suggestions are prompts for investigation, not automatic business decisions.
 
-- **600 Total Generated Scenarios** across 10 families:
-  1. `control_valid` (60): Unmodified healthy completed sales (Expected Detection = 0)
-  2. `pricing_extreme_discount` (60): Rogue unapproved discounts 50%–85% (Expected Detection = 1)
-  3. `pricing_glitch_negative_margin` (60): Catalog checkout price tampered below cost (Expected Detection = 1)
-  4. `campaign_funnel_inversion` (60): Physical funnel inversions (Expected Detection = 1)
-  5. `campaign_budget_burn` (60): High spend with zero clicks/conversions (Expected Detection = 1)
-  6. `inventory_phantom_stockout` (60): Flagged 1 with 5x surplus stock (Expected Detection = 1)
-  7. `inventory_unflagged_depletion` (60): Zero stock unflagged with 15–30 day supplier delay (Expected Detection = 1)
-  8. `return_abuse_cluster` (60): High volume repeated returns (Expected Detection = 1)
-  9. `compound_multi_signal` (60): Bulk volume + deep discount + negative margin (Expected Detection = 1)
-  10. `benign_edge_case_bulk` (60): Large volume promotional purchase with legitimate positive margin (Expected Detection = 0)
+**Status: planned, not yet integrated.** The Gemini integration, assistant interface, evidence-grounding layer, and navigation actions must be implemented and tested before being presented as available features. The current prototype executes 100% offline without requiring external API calls or keys.
 
-### Leakage Prevention Guarantees
-- **Strict Grouped Partitioning**: All scenario variants originating from the same `source_record_id` are grouped into one split. No source record crosses train and test splits.
-- **Target Feature Isolation**: `scenario_id`, `injected_condition`, `severity`, and `expected_detection` are strictly excluded from model feature matrices.
+## Technology and project structure
 
----
+LAPE is a Python application built around Streamlit, with modular analysis code:
 
-## 6. Fair Benchmark Evaluation
+| Layer / File | Verified Role in Repository |
+| :--- | :--- |
+| `app.py` | Streamlit application entry point (8-page dashboard) |
+| `src/validation.py` | Input data validation, schema checks, and orphan key detection |
+| `src/features.py` | Feature engineering (margins, shortfalls, category robust z-scores) |
+| `src/rules.py` | Deterministic rule-based leak detection (pricing, inventory, marketing) |
+| `src/model.py` | Verified ML algorithms: `HistGradientBoostingClassifier` & `RandomForestClassifier` |
+| `src/evaluation.py` | Fair benchmark evaluations (baselines vs model, precision@k) |
+| `src/triage.py` | 3-dimensional case prioritization (Exposure, Reliability, Urgency) |
+| `src/scenario_generator.py` | Reproducible synthetic scenario generation (10 anomaly families) |
+| `src/currency.py` | Dual INR (₹) and USD ($) currency formatting |
+| `src/pdf_report.py` | PDF executive summary report generator using ReportLab |
+| `ui/themes.py` | Dark Industrial and Clean Light CSS stylesheets |
+| `ui/translations.py` | Multi-language localization dictionaries (8 languages) |
+| `tests/` | Automated unit test suite (15 passing tests) |
+| `DATASET/`, `data/raw/` | Original supplied business CSV datasets (27,450 records) |
+| `data/synthetic/` | Generated synthetic scenario datasets and scenario manifest |
+| `models/` | Serialized model artifacts (`lape_hist_gb.joblib`, `lape_random_forest.joblib`) |
+| `docs/` | Complete project architecture, mathematical formulas, and audit reports |
 
-Models were evaluated on a held-out test split (90 samples: 60 leak injections, 30 valid controls) grouped strictly by source record:
+## Run LAPE locally
 
-| Method | Precision | Recall | F1-Score | PR-AUC | Precision@10 | FPR on Controls |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Baseline A** (Raw Shortfall Ranking) | 1.000 | 0.717 | 0.835 | 0.944 | 1.000 | 0.000 |
-| **Baseline B** (Derived Composite Rules) | 1.000 | 0.550 | 0.710 | 0.897 | 1.000 | 0.000 |
-| **LAPE ML Model** (HistGradientBoosting) | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 0.000 |
+### Requirements
 
-### Per-Scenario-Family Breakdown (Held-Out Test Set)
-- `benign_edge_case_bulk`: 14 samples — Clean Pass Specificity: **100.0%** (0 False Positives)
-- `control_valid`: 16 samples — Clean Pass Specificity: **100.0%** (0 False Positives)
-- `compound_multi_signal`: 25 samples — Detection Recall: **100.0%**
-- `pricing_extreme_discount`: 11 samples — Detection Recall: **100.0%**
-- `pricing_glitch_negative_margin`: 12 samples — Detection Recall: **100.0%**
-- `return_abuse_cluster`: 12 samples — Detection Recall: **100.0%**
+- Python 3.10 to 3.12 (tested on Python 3.12.10)
+- Dependencies specified in `requirements.txt` (`pandas`, `numpy`, `scikit-learn`, `streamlit`, `reportlab`, `pytest`)
+- Pre-trained model artifacts included in `models/`
 
-> [!WARNING]
-> **Evaluation Transparency & Non-Generalization**:
-> High performance on synthetic test sets reflects separation of documented physical anomalies from valid controls. It does **not** prove 100% detection of real-world corporate fraud. Real-world applications require ongoing human review and model calibration against audited accounting adjustments.
-
----
-
-## 7. Dashboard Architecture & Interactive Walkthrough
-
-The Streamlit dashboard (`app.py`) provides a professional, dual-theme forensic interface:
-
-- **Theme & Accessibility**: Toggle between **Dark Industrial** and **Clean Light** themes (`ui/themes.py`) with responsive cards and tabular monospace number alignment.
-- **Global Multi-Language Localization**: Full UI localization across **8 languages** (`ui/translations.py`): English, Hindi (हिन्दी), Spanish (Español), French (Français), German (Deutsch), Japanese (日本語), Chinese (中文), and Russian (Русский).
-- **Dual Currency Support**: Instant toggle between Indian Rupee (₹ INR) and US Dollar ($ USD) with proper comma separators and decimal precision (`src/currency.py`).
-
-### Five Dedicated Forensic Modules:
-1. **📊 Data Quality & Pipeline Audit**: Recomputes all dataset statistics, schema validations, foreign key orphan checks, and baseline inconsistency summaries live.
-2. **🚨 Evidence-Linked Alert Queue**: Multi-filter alert stream (Domain, Urgency, Reliability, Search). Selecting an alert displays:
-   - Dedicated cards for Potential Financial Exposure, Evidence Reliability, and Action Urgency.
-   - Step-by-step mathematical calculation formula.
-   - Recommended operational verification actions (e.g., hold pending shipment, audit vendor contract).
-3. **🔬 Financial Leak Physics Lab**: Interactive simulator allowing managers to manipulate quantity, cost, discount, and status in real-time, observing live margin calculations and ML leak probability predictions.
-4. **⚖️ Fair Benchmark (Baselines vs Model)**: Direct side-by-side comparison tables, precision-recall metrics, and per-family performance breakdowns.
-5. **📋 Methodology, Provenance & Export**: Mathematical documentation, synthetic scenario manifest, and one-click CSV export of prioritized alert queues.
-
----
-
-## 8. Test Suite Summary
-
-Run all tests via pytest:
-```powershell
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" -m pytest tests -v
+### Windows One-Click Quickstart
+Double-click [`run_lape.bat`](run_lape.bat) or run from terminal:
+```cmd
+run_lape.bat
 ```
-**15 of 15 tests passed** (1.08s):
-- `test_hand_calculated_positive_margin`: Verifies $0 shortfall on positive margins.
-- `test_hand_calculated_negative_margin_shortfall`: Verifies exact line shortfall on negative margins.
-- `test_discount_fraction_representation`: Verifies discount fraction scaling (0.15 vs 15).
-- `test_transaction_status_segregation`: Verifies Completed vs Pending vs Returned vs Cancelled segregation.
-- `test_zero_and_negative_edge_cases`: Verifies zero quantity, zero price, and 100% discount.
-- `test_scenario_reproducibility`: Verifies seed reproducibility across multiple generator runs.
-- `test_target_leakage_prevention`: Verifies exclusion of scenario metadata from features.
-- `test_grouped_split_isolation`: Verifies 0 source record overlap between train and test sets.
-- `test_triage_three_distinct_dimensions`: Verifies exposure, reliability, and urgency separation.
-- `test_no_double_counting_in_unified_queue`: Verifies unique alert IDs and exact exposure summation.
-- `test_hand_calculated_metric_evaluations`: Verifies precision, recall, f1, precision@k, and control FPR.
-- `test_raw_row_counts_and_uniqueness`: Verifies 27,450 row counts and 0 duplicates across all 5 CSVs.
-- `test_referential_integrity_zero_orphans`: Verifies 0 orphan foreign keys.
-- `test_campaign_funnel_physics_detection`: Verifies detection of 171 campaign funnel inversions.
-- `test_inventory_flag_discrepancy_detection`: Verifies detection of 1,253 inventory flag discrepancies.
+This launcher automatically verifies Python 3.10+, checks dependencies, and launches the app at `http://localhost:8501`.
 
----
+### Manual Windows Setup (PowerShell)
 
-## 9. Known Limitations & Operational Considerations
+Open PowerShell in the project directory:
 
-1. **Synthetic Dataset Margin Inversion**: In this educational dataset, 76 products have list price below unit cost. In production, this must be verified against actual supplier purchase agreements before treating as operational fraud.
-2. **Campaign-Transaction Linkage**: Campaigns lack transaction-level tracking keys; marketing spend exposure is therefore evaluated at the campaign funnel level rather than attributed to individual orders.
-3. **Lack of Audited Financial Loss Labels**: Supervised models are trained and tested on controlled synthetic scenarios. In enterprise deployment, periodic recalibration on confirmed auditor adjustments is necessary.
+```powershell
+# 1. Create and activate a virtual environment
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 
----
+# 2. Upgrade pip and install dependencies
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 
-## 10. Configuration & Environment Variables
+# 3. Launch Streamlit Application
+python -m streamlit run app.py --server.port 8501
+```
 
-LAPE is self-contained and operates without required external services. Optional environment variables include:
+Open `http://localhost:8501` in your browser.
 
-| Variable | Default Value | Description |
-| :--- | :--- | :--- |
-| `LAPE_DEMO_USER` | `demo@lape.local` | Username for evaluator login sandbox |
-| `LAPE_DEMO_PASS` | `lape2026` | Password for evaluator login sandbox |
-| `STREAMLIT_SERVER_PORT` | `8501` | Listening port for the Streamlit web dashboard |
-| `STREAMLIT_SERVER_HEADLESS`| `true` | Runs server headlessly without auto-opening browser |
+If PowerShell blocks virtual-environment activation scripts, use the environment's Python directly:
 
----
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m streamlit run app.py --server.port 8501
+```
 
-## 11. Privacy, Security & Data Handling
+### Run tests
 
-- **100% Offline Local Processing**: All mathematical audits, scenario synthesis, model training, inference, and visualization run strictly on the local host.
-- **Zero Cloud Data Exfiltration**: No customer data, transactions, inventory counts, or financial values are ever transmitted to any third-party API or cloud service.
-- **Local Reviewer Sandbox**: Includes an offline challenge mechanism (arithmetic CAPTCHA) to demonstrate access control patterns suitable for corporate financial intelligence systems.
-- **Zero Secret Storage**: The repository contains no API keys, credentials, or private access tokens.
+From the repository root, run the automated test suite using either command:
 
----
+```powershell
+# Standard pytest execution (configured via pytest.ini)
+pytest tests -v
 
-## 12. Future Roadmap & Proposed Gemini AI Explanation Layer
+# Or using the Python module runner
+python -m pytest tests -v
+```
 
-> [!NOTE]
-> **Implementation Clarification**:
-> LAPE currently executes 100% on deterministic mathematical rules, physical funnel constraints, and local scikit-learn models (`HistGradientBoostingClassifier`, `RandomForestClassifier`). **No external LLM or AI API is currently integrated or required for execution.**
+**Test Suite Verification:**
+- **Result:** **15 of 15 tests PASSED** in ~1.07 seconds.
+- **Coverage:** Financial equations, margin edge cases, discount scaling, transaction status realization, scenario reproducibility, target leakage prevention, grouped split isolation, 3-dimensional triage segregation, queue uniqueness, evaluation metric calculation, and dataset row/orphan integrity.
 
-### Proposed Future Enhancement:
-An optional, enterprise-grade Gemini API explanation layer could assist non-technical operational investigators by translating complex multi-dimensional evidence into concise executive briefing notes.
+## Security and privacy
 
-**Mandatory Grounding Principles for Future AI Integration**:
-1. **Strict Evidence Grounding**: The AI model must only receive and summarize verifiable evidence generated by LAPE's existing mathematical engines, rule outputs, and trained model probabilities.
-2. **No Hallucinated Predictions**: The language model must never invent new financial shortfall figures, fabricate audit findings, or alter assigned priority scores.
-3. **Audit Trail Retention**: Every generated text narrative must link back to the exact record IDs and mathematical formulas that produced the underlying evidence.
+- **100% Offline Processing:** All mathematical audits, feature generation, model inference, and triage run locally on the host machine.
+- **No Secret Storage:** Never commit API keys, passwords, tokens, or populated `.env` files.
+- **Clean Git Hygiene:** `.env` and virtual environments are excluded via `.gitignore`.
+- **Data Confidentiality:** Do not publish confidential customer or business records to public endpoints.
+- **Controlled AI Data Transmission:** Avoid sending raw customer datasets to external AI services when a small, aggregated summary is sufficient.
+- **Human Decision Boundary:** Do not use this prototype as the sole basis for financial, legal, compliance, or punitive personnel actions.
+
+## Current limitations
+
+- Results depend on input quality, completeness, and business meaning.
+- In this educational dataset, 76 products have list price below unit cost; in real operations, catalog pricing should be verified with procurement before assuming fraud.
+- Synthetic scenarios do not establish generalization to real-world corporate operations.
+- Risk indicators require human verification before operational action.
+- Exposure formulas must be interpreted using their documented assumptions.
+- Gemini AI explanations are not part of the working feature set until implemented and tested.
+- Public deployment, multi-tenant authentication, and enterprise access control require separate infrastructure review.
+
+## Roadmap
+
+- [x] Modular validation, feature engineering, rules, evaluation, and triage code
+- [x] Streamlit dashboard with 8 workspaces and scenario-oriented workflow
+- [x] Dark/light theme and 8-language multilingual interface
+- [x] Fully passing test suite (15/15 unit tests) and verified pytest configuration
+- [x] Confirmed exact dataset filenames, model artifacts, and reproducible setup
+- [ ] Implement a grounded Gemini-powered explanation tab
+- [ ] Add safe navigation from AI responses to relevant dashboard pages
+- [ ] Show evidence references and uncertainty in explanations
+- [ ] Validate the complete system against representative real-world data where permitted
+
+## The principle
+
+> **Find the signal. Show the evidence. Explain the uncertainty. Leave the decision to the human.**
+
+LAPE aims to make business-data investigation more accessible without confusing a model score with truth. Its value is not just finding something unusual; it is helping a reviewer understand why it matters, what evidence supports it, and what should be checked next.
+
+------------------------------------------------------------------------
+
+*Datathon 2026 — Track 4: The Money Leak — LAPE (Leak Analysis & Prediction Engine)*
