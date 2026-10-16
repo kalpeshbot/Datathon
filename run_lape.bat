@@ -13,26 +13,46 @@ echo.
 cd /d "%~dp0"
 echo [*] Working Directory: %CD%
 
-:: 2. Locate Verified Python 3.12 Executable
+:: 2. Locate Verified Python 3.12+ Executable
 set "PYTHON_EXE="
 
-if exist "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" (
-    set "PYTHON_EXE=C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe"
-) else (
-    where py >nul 2>&1
+:: First attempt: Windows Python Launcher py -3.12 or py -3
+where py >nul 2>&1
+if !errorlevel! equ 0 (
+    py -3.12 -c "import sys; exit(0 if sys.version_info >= (3, 10) else 1)" >nul 2>&1
     if !errorlevel! equ 0 (
         set "PYTHON_EXE=py -3.12"
     ) else (
-        where python >nul 2>&1
+        py -3 -c "import sys; exit(0 if sys.version_info >= (3, 10) else 1)" >nul 2>&1
+        if !errorlevel! equ 0 (
+            set "PYTHON_EXE=py -3"
+        )
+    )
+)
+
+:: Second attempt: Standard python executable on PATH
+if "%PYTHON_EXE%"=="" (
+    where python >nul 2>&1
+    if !errorlevel! equ 0 (
+        python -c "import sys; exit(0 if sys.version_info >= (3, 10) else 1)" >nul 2>&1
         if !errorlevel! equ 0 (
             set "PYTHON_EXE=python"
         )
     )
 )
 
+:: Third attempt: Default local Windows user path fallback
 if "%PYTHON_EXE%"=="" (
-    echo [ERROR] No suitable Python 3.12 environment found!
-    echo Please install Python 3.12 with pandas, scikit-learn, and streamlit.
+    if exist "%LOCALAPPDATA%\Programs\Python\Python312\python.exe" (
+        set "PYTHON_EXE=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+    ) else if exist "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" (
+        set "PYTHON_EXE=C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe"
+    )
+)
+
+if "%PYTHON_EXE%"=="" (
+    echo [ERROR] No suitable Python 3.10+ environment found!
+    echo Please install Python 3.10 or higher and make sure it is added to your PATH.
     pause
     exit /b 1
 )

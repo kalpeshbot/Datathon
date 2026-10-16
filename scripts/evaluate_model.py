@@ -68,25 +68,37 @@ def main():
     # Feature matrix
     X, _ = prepare_feature_matrix(tx_feat, feature_cols=clf.feature_names)
     y_true = tx_meta["expected_detection"].to_numpy().astype(int)
+    groups = tx_meta["source_record_id"].to_numpy()
 
-    preds = clf.predict(X, threshold=0.5)
-    scores = clf.predict_proba(X)[:, 1]
+    # Partition by source_record_id to evaluate strictly on held-out test partition
+    from sklearn.model_selection import train_test_split
+    unique_groups = np.unique(groups)
+    _, test_groups = train_test_split(unique_groups, test_size=0.25, random_state=42)
+    test_mask = np.isin(groups, test_groups)
 
-    # Benchmark
-    print("\nRunning Evaluation Benchmark on all 360 transaction scenario records:")
+    X_held_out = X[test_mask]
+    y_held_out = y_true[test_mask]
+    test_df = tx_feat.iloc[test_mask].copy().reset_index(drop=True)
+    test_meta = tx_meta.iloc[test_mask].copy().reset_index(drop=True)
+
+    preds = clf.predict(X_held_out, threshold=0.5)
+    scores = clf.predict_proba(X_held_out)[:, 1]
+
+    # Benchmark on held-out split
+    print(f"\nRunning Evaluation Benchmark on strictly held-out test set ({len(y_held_out)} records, 0 source overlap with train):")
     results = benchmark_baselines_vs_model(
-        test_df=tx_feat,
-        test_meta=tx_meta,
-        y_test=y_true,
+        test_df=test_df,
+        test_meta=test_meta,
+        y_test=y_held_out,
         model_preds=preds,
         model_scores=scores,
-        budget_k=20
+        budget_k=10
     )
 
     comp_df = pd.DataFrame(results["comparison_table"])
     print("\n" + comp_df.to_string(index=False))
 
-    print("\nPer-Scenario-Family Breakdown (LAPE ML Model):")
+    print("\nPer-Scenario-Family Breakdown on Held-Out Test Data:")
     for fam, d in results["model_family_breakdown"].items():
         if d["type"] == "control":
             print(f"  - [Control] {fam:<30}: Samples={d['sample_count']}, Clean Pass={d['clean_pass_rate']*100:.1f}%, FP={d['false_positives']}")

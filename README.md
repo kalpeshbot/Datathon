@@ -33,9 +33,19 @@ This launcher automatically verifies Python 3.12, confirms installed packages (`
 
 ### Option B: Manual Terminal Execution
 ```powershell
-# Run using Python 3.12
-& "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" -m streamlit run app.py --server.port=8501
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Launch Streamlit Application (Localhost Port 8501)
+python -m streamlit run app.py --server.port 8501
 ```
+
+### Local Evaluation Sandbox Credentials
+For local reviewer and evaluator convenience:
+- **Default Username:** `demo@lape.local` (or `admin`)
+- **Default Password:** `lape2026`
+- **Environment Override:** Set `LAPE_DEMO_USER` and `LAPE_DEMO_PASS` in your environment to override.
+- *Includes a local arithmetic challenge (CAPTCHA) to simulate authenticated access within an offline evaluation sandbox.*
 
 ### Option C: Running the Full Reproducible Pipeline from Scratch
 ```powershell
@@ -159,8 +169,13 @@ Models were evaluated on a held-out test split (90 samples: 60 leak injections, 
 
 ## 7. Dashboard Architecture & Interactive Walkthrough
 
-The Streamlit dashboard (`app.py`) provides a Dark Industrial UI:
+The Streamlit dashboard (`app.py`) provides a professional, dual-theme forensic interface:
 
+- **Theme & Accessibility**: Toggle between **Dark Industrial** and **Clean Light** themes (`ui/themes.py`) with responsive cards and tabular monospace number alignment.
+- **Global Multi-Language Localization**: Full UI localization across **8 languages** (`ui/translations.py`): English, Hindi (हिन्दी), Spanish (Español), French (Français), German (Deutsch), Japanese (日本語), Chinese (中文), and Russian (Русский).
+- **Dual Currency Support**: Instant toggle between Indian Rupee (₹ INR) and US Dollar ($ USD) with proper comma separators and decimal precision (`src/currency.py`).
+
+### Five Dedicated Forensic Modules:
 1. **📊 Data Quality & Pipeline Audit**: Recomputes all dataset statistics, schema validations, foreign key orphan checks, and baseline inconsistency summaries live.
 2. **🚨 Evidence-Linked Alert Queue**: Multi-filter alert stream (Domain, Urgency, Reliability, Search). Selecting an alert displays:
    - Dedicated cards for Potential Financial Exposure, Evidence Reliability, and Action Urgency.
@@ -178,7 +193,7 @@ Run all tests via pytest:
 ```powershell
 & "C:\Users\kalpesh\AppData\Local\Programs\Python\Python312\python.exe" -m pytest tests -v
 ```
-**15 of 15 tests passed** (1.22s):
+**15 of 15 tests passed** (1.08s):
 - `test_hand_calculated_positive_margin`: Verifies $0 shortfall on positive margins.
 - `test_hand_calculated_negative_margin_shortfall`: Verifies exact line shortfall on negative margins.
 - `test_discount_fraction_representation`: Verifies discount fraction scaling (0.15 vs 15).
@@ -197,8 +212,46 @@ Run all tests via pytest:
 
 ---
 
-## 9. Known Limitations & Future Validation Needs
+## 9. Known Limitations & Operational Considerations
 
 1. **Synthetic Dataset Margin Inversion**: In this educational dataset, 76 products have list price below unit cost. In production, this must be verified against actual supplier purchase agreements before treating as operational fraud.
 2. **Campaign-Transaction Linkage**: Campaigns lack transaction-level tracking keys; marketing spend exposure is therefore evaluated at the campaign funnel level rather than attributed to individual orders.
 3. **Lack of Audited Financial Loss Labels**: Supervised models are trained and tested on controlled synthetic scenarios. In enterprise deployment, periodic recalibration on confirmed auditor adjustments is necessary.
+
+---
+
+## 10. Configuration & Environment Variables
+
+LAPE is self-contained and operates without required external services. Optional environment variables include:
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| `LAPE_DEMO_USER` | `demo@lape.local` | Username for evaluator login sandbox |
+| `LAPE_DEMO_PASS` | `lape2026` | Password for evaluator login sandbox |
+| `STREAMLIT_SERVER_PORT` | `8501` | Listening port for the Streamlit web dashboard |
+| `STREAMLIT_SERVER_HEADLESS`| `true` | Runs server headlessly without auto-opening browser |
+
+---
+
+## 11. Privacy, Security & Data Handling
+
+- **100% Offline Local Processing**: All mathematical audits, scenario synthesis, model training, inference, and visualization run strictly on the local host.
+- **Zero Cloud Data Exfiltration**: No customer data, transactions, inventory counts, or financial values are ever transmitted to any third-party API or cloud service.
+- **Local Reviewer Sandbox**: Includes an offline challenge mechanism (arithmetic CAPTCHA) to demonstrate access control patterns suitable for corporate financial intelligence systems.
+- **Zero Secret Storage**: The repository contains no API keys, credentials, or private access tokens.
+
+---
+
+## 12. Future Roadmap & Proposed Gemini AI Explanation Layer
+
+> [!NOTE]
+> **Implementation Clarification**:
+> LAPE currently executes 100% on deterministic mathematical rules, physical funnel constraints, and local scikit-learn models (`HistGradientBoostingClassifier`, `RandomForestClassifier`). **No external LLM or AI API is currently integrated or required for execution.**
+
+### Proposed Future Enhancement:
+An optional, enterprise-grade Gemini API explanation layer could assist non-technical operational investigators by translating complex multi-dimensional evidence into concise executive briefing notes.
+
+**Mandatory Grounding Principles for Future AI Integration**:
+1. **Strict Evidence Grounding**: The AI model must only receive and summarize verifiable evidence generated by LAPE's existing mathematical engines, rule outputs, and trained model probabilities.
+2. **No Hallucinated Predictions**: The language model must never invent new financial shortfall figures, fabricate audit findings, or alter assigned priority scores.
+3. **Audit Trail Retention**: Every generated text narrative must link back to the exact record IDs and mathematical formulas that produced the underlying evidence.
