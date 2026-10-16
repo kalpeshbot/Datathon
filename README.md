@@ -13,6 +13,14 @@ An analytics-first decision-support prototype for inspecting business records, s
 
 ------------------------------------------------------------------------
 
+## Project Demo Video
+
+A walkthrough demonstration of the LAPE (Leak Analysis & Prediction Engine) decision-support platform, showing its evidence-linked triage queue, forensic investigation workflows, and scenario physics laboratory in action:
+
+🎬 **[Watch the LAPE Project Demo](assets/lape-project-demo.mp4)**
+
+------------------------------------------------------------------------
+
 ## The pitch
 
 Businesses rarely keep every useful clue in one place. A transaction can look ordinary on its own, while a pattern across transactions, inventory, campaigns, customers, and products may deserve a closer look. The challenge is not just finding an unusual record. It is making the signal understandable enough for someone to investigate it.
